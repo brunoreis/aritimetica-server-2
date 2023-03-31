@@ -1,27 +1,35 @@
 import 'reflect-metadata'
 import * as tq from 'type-graphql'
-import { PostCreateInput, PostResolver, SortOrder } from './PostResolver'
 import { UserResolver } from './UserResolver'
 import { ApolloServer } from 'apollo-server'
 import { DateTimeResolver } from 'graphql-scalars'
-import { context } from './context'
 import { GraphQLScalarType } from 'graphql'
+import { PrismaClient } from '@prisma/client'
+import { authChecker } from "./AuthChecker";
+import { createContext } from './createContext'
+
+
+const INIT_MESSAGE = `
+🚀 Server ready at: http://localhost:4000
+⭐️  See sample queries: http://pris.ly/e/ts/graphql-typegraphql#using-the-graphql-api
+`;
 
 const app = async () => {
-  tq.registerEnumType(SortOrder, {
-    name: 'SortOrder',
-  })
 
   const schema = await tq.buildSchema({
-    resolvers: [PostResolver, UserResolver, PostCreateInput],
+    resolvers: [UserResolver],
+    authChecker,
     scalarsMap: [{ type: GraphQLScalarType, scalar: DateTimeResolver }],
     validate: { forbidUnknownValues: false }
   })
 
-  new ApolloServer({ schema, context: context }).listen({ port: 4000 }, () =>
-    console.log(`
-🚀 Server ready at: http://localhost:4000
-⭐️  See sample queries: http://pris.ly/e/ts/graphql-typegraphql#using-the-graphql-api`),
+  const prisma = new PrismaClient()
+
+  new ApolloServer({ 
+    schema, 
+    context: createContext
+  }).listen({ port: 4000 }, () =>
+    console.log(INIT_MESSAGE),
   )
 }
 

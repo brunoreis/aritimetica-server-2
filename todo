@@ -1,0 +1,10 @@
+- fix TS errors
+- add authorization to at least one endpoint
+- deploy 
+    - create local docker machines to run it
+        - postgress db
+            - migrate password fields
+        - postgress tool to see the db
+        - node 
+    - deploy
+        - add restrictions
