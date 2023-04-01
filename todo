@@ -1,11 +1,12 @@
 
-- Create user roles: "ADMIN", "TEACHER", "STUDENT"
-    - Prisma and seeds
-    - type-graphql objects
-    - test with allUsers queries
-    - inject roles into the TOKEN on login
-    - use @Authorized middleware 
-    - allow ADMINs only to see the allUsers resolver
+- Update README
+    - Prisma: basic steps to update the schema and run tests
+    - How to see it? 
+    - type-graphql: same thing
+    - How to test it? 
+- Auth
+    - add orgs
+    - inject roles and orgs into the TOKEN on login? 
 - deploy 
     - create local docker machines to run it
         - postgress db

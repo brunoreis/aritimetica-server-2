@@ -11,18 +11,21 @@ type ContextInput = {
   res: Response
 }
 
-export const createContext = ({ req, res }: ContextInput ): Context => {
-    // Get the JWT token from the request headers
+export const createContext = async ({ req, res }: ContextInput ): Promise<Context> => {
     const authHeader = req.headers.authorization;
     const token = authHeader && authHeader.split(" ")[1];
-  
-    let userId: string | null = null;
-  
-    // Verify the JWT token and get the user id
+    let userData = undefined;
+    
     if (token) {
       try {
-        const { id } = verify(token, JWT_SECRET_KEY) as { id: string };
-        userId = id;
+        const { userId } = verify(token, JWT_SECRET_KEY) as { userId: string };
+        const user = await prisma.user.findUnique({ where: { id: userId } })
+        if(user) {
+          userData = {
+            id: userId,
+            role: user.role
+          }
+        }
       } catch (err) {
         console.log(err);
       }
@@ -32,6 +35,6 @@ export const createContext = ({ req, res }: ContextInput ): Context => {
       prisma,
       req,
       res,
-      userId,
+      userData
     };
 };

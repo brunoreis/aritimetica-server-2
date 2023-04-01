@@ -4,9 +4,8 @@ import { UserResolver } from './UserResolver'
 import { ApolloServer } from 'apollo-server'
 import { DateTimeResolver } from 'graphql-scalars'
 import { GraphQLScalarType } from 'graphql'
-import { authChecker } from "./AuthChecker";
+import { customAuthChecker } from './customAuthChecker';
 import { createContext } from './createContext'
-
 
 const INIT_MESSAGE = `
 🚀 Server ready at: http://localhost:4000
@@ -14,10 +13,9 @@ const INIT_MESSAGE = `
 `;
 
 const app = async () => {
-
   const schema = await tq.buildSchema({
     resolvers: [UserResolver],
-    authChecker,
+    authChecker: customAuthChecker,
     scalarsMap: [{ type: GraphQLScalarType, scalar: DateTimeResolver }],
     validate: { forbidUnknownValues: false }
   })

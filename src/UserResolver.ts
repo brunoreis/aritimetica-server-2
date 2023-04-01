@@ -1,5 +1,6 @@
 import 'reflect-metadata'
 import {
+  Authorized,
   Resolver,
   Query,
   Mutation,
@@ -15,6 +16,7 @@ import { sign } from "jsonwebtoken";
 import { JWT_SECRET_KEY } from "./env";
 import bcrypt from 'bcrypt';
 import { AuthResponse } from './AuthResponse';
+import { customAuthChecker } from "./customAuthChecker";
 
 @InputType()
 class UserCreateInput {
@@ -23,6 +25,9 @@ class UserCreateInput {
 
   @Field()
   password: string;
+
+  @Field()
+  role: string;
 
   @Field({ nullable: true })
   name?: string;
@@ -56,13 +61,12 @@ export class UserResolver {
 
   @Mutation(() => User)
   async deleteUser(
-    @Arg('id', (type) => Int) id: number, 
+    @Arg('id', (type) => String) id: string, 
     @Ctx() ctx: Context
   ): Promise<User> {
     const deletedUser = await ctx.prisma.user.delete({
-      where: { id: String(id) },
+      where: { id },
     });
-    console.log({ deletedUser })
     return deletedUser;
   }
 
@@ -77,11 +81,13 @@ async signupUser(
       email: data.email,
       password: hashedPassword,
       name: data.name,
+      role: data.role,
       bio: data.bio,
     },
   })
 }
 
+  @Authorized(["admin"],  { authChecker: customAuthChecker })
   @Query(() => [User])
   async allUsers(@Ctx() ctx: Context) {
     return ctx.prisma.user.findMany()

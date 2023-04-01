@@ -19,4 +19,7 @@ export class User {
 
   @Field()
   password: string;
+
+  @Field((type) => String)
+  role: string;
 }
