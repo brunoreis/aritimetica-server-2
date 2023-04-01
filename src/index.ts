@@ -4,7 +4,6 @@ import { UserResolver } from './UserResolver'
 import { ApolloServer } from 'apollo-server'
 import { DateTimeResolver } from 'graphql-scalars'
 import { GraphQLScalarType } from 'graphql'
-import { PrismaClient } from '@prisma/client'
 import { authChecker } from "./AuthChecker";
 import { createContext } from './createContext'
 
@@ -22,8 +21,6 @@ const app = async () => {
     scalarsMap: [{ type: GraphQLScalarType, scalar: DateTimeResolver }],
     validate: { forbidUnknownValues: false }
   })
-
-  const prisma = new PrismaClient()
 
   new ApolloServer({ 
     schema, 

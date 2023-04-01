@@ -5,14 +5,12 @@ import {
   Mutation,
   Arg,
   Ctx,
-  FieldResolver,
-  Root,
   Int,
   InputType,
   Field,
 } from 'type-graphql'
 import { User } from './User'
-import { Context } from './index'
+import { Context } from './types'
 import { sign } from "jsonwebtoken";
 import { JWT_SECRET_KEY } from "./env";
 import bcrypt from 'bcrypt';
@@ -50,7 +48,7 @@ export class UserResolver {
     if (!isValidPassword) {
       throw new Error("Invalid email or Password");
     }
-    const token = sign({ userId: user.id, role: user.role }, JWT_SECRET_KEY, {
+    const token = sign({ userId: user.id }, JWT_SECRET_KEY, {
       expiresIn: "1h",
     });
     return { user, token };
@@ -62,7 +60,7 @@ export class UserResolver {
     @Ctx() ctx: Context
   ): Promise<User> {
     const deletedUser = await ctx.prisma.user.delete({
-      where: { id },
+      where: { id: String(id) },
     });
     console.log({ deletedUser })
     return deletedUser;

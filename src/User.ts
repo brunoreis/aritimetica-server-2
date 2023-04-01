@@ -5,7 +5,7 @@ import { IsEmail } from 'class-validator'
 @ObjectType()
 export class User {
   @Field((type) => ID)
-  id: number
+  id: string
 
   @Field()
   @IsEmail()
@@ -15,7 +15,7 @@ export class User {
   name?: string | null
 
   @Field(() => String, { nullable: true })
-  bio?: string;
+  bio?: string | null;
 
   @Field()
   password: string;

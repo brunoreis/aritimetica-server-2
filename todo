@@ -1,4 +1,3 @@
-- fix TS errors
 - add authorization to at least one endpoint
 - deploy 
     - create local docker machines to run it
