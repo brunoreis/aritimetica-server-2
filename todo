@@ -10,8 +10,10 @@
 - deploy 
     - create local docker machines to run it
         - postgress db
-            - migrate password fields
+            - migrate password field types to varchars(since PG native are richer)
+            - create enum for roles field
         - postgress tool to see the db
         - node 
+        - manage environment vars and passowrds 
     - deploy
-        - add restrictions
+        - add restrictions on migrations, seeds, etc...
