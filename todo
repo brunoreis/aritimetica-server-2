@@ -1,3 +1,4 @@
+- rename app, passwords and db
 - create local docker machines to run it
     - postgress db
         - migrate password field types to varchars(since PG native are richer)
