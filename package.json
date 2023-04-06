@@ -1,12 +1,11 @@
 {
   "name": "typegraphql-example",
   "scripts": {
-    "env:db": "export DATABASE_URL=postgres://gepeto:pin0quio@localhost:5432/gepeto_server;",
-    "dev": " ts-node-dev --no-notify --respawn --transpile-only src/index.ts",
+    "dev": "ts-node-dev --no-notify --respawn --transpile-only src/index.ts",
     "build": "tsc",
-    "prisma:reset_and_seed": "export DATABASE_URL=postgres://gepeto:pin0quio@localhost:5432/gepeto_server; npx prisma migrate reset",
-    "prisma:generate": "export DATABASE_URL=postgres://gepeto:pin0quio@localhost:5432/gepeto_server; npx prisma generate",
-    "prisma:migrate": "export DATABASE_URL=postgres://gepeto:pin0quio@localhost:5432/gepeto_server; npx prisma migrate dev",
+    "prisma:reset_and_seed": "npx prisma migrate reset",
+    "prisma:generate": "npx prisma generate",
+    "prisma:migrate": "npx prisma migrate dev",
     "start": "node dist/index.js",
     "clean": "rm -rf dist/*"
   },
@@ -15,6 +14,7 @@
     "apollo-server": "3.12.0",
     "bcrypt": "^5.1.0",
     "class-validator": "0.14.0",
+    "dotenv": "^16.0.3",
     "graphql": "15.8.0",
     "graphql-scalars": "1.21.3",
     "jsonwebtoken": "^9.0.0",

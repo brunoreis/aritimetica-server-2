@@ -6,9 +6,9 @@ services:
     volumes:
       - postgres:/var/lib/postgresql/data/
     environment:
-      POSTGRES_USER: gepeto
-      POSTGRES_PASSWORD: pin0quio
-      POSTGRES_DB: gepeto_server
+      POSTGRES_USER: aritimetica
+      POSTGRES_PASSWORD: matematica
+      POSTGRES_DB: aritimetica
     ports:
       - "5432:5432"
 volumes:

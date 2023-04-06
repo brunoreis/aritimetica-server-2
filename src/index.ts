@@ -6,6 +6,8 @@ import { DateTimeResolver } from 'graphql-scalars'
 import { GraphQLScalarType } from 'graphql'
 import { customAuthChecker } from './customAuthChecker';
 import { createContext } from './createContext'
+import { config } from 'dotenv'
+config({ path: '.env' })
 
 const INIT_MESSAGE = `
 🚀 Server ready at: http://localhost:4000

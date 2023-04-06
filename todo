@@ -1,4 +1,3 @@
-- rename app, passwords and db
 - create local docker machines to run it
     - postgress db
         - migrate password field types to varchars(since PG native are richer)
@@ -9,7 +8,7 @@
 
 - Update README
     - Prisma: basic steps to update the schema and run tests
-    - How to see it? 
+    - How to see it?
     - type-graphql: same thing
     - How to test it? 
 - Auth
