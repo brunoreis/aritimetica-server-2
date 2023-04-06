@@ -11,5 +11,14 @@ services:
       POSTGRES_DB: aritimetica
     ports:
       - "5432:5432"
+  app:
+    build: .
+    ports:
+      - "4000:4000"
+    volumes:
+      - .:/app
+    environment:
+      DATABASE_URL: postgres://aritimetica:matematica@db:5432/aritimetica
+    tty: true
 volumes:
   postgres:
