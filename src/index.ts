@@ -7,8 +7,8 @@ import { GraphQLScalarType } from 'graphql'
 import { customAuthChecker } from './customAuthChecker';
 import { createContext } from './createContext'
 import { config } from 'dotenv'
-config({ path: '.env' })
 
+config({ path: '.env' })
 const INIT_MESSAGE = `
 🚀 Server ready at: http://localhost:4000
 ⭐️  See sample queries: http://pris.ly/e/ts/graphql-typegraphql#using-the-graphql-api
