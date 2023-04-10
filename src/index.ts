@@ -25,7 +25,7 @@ const app = async () => {
   new ApolloServer({ 
     schema, 
     context: createContext
-  }).listen({ port: 4000 }, () =>
+  }).listen({ port: process.env.PORT }, () =>
     console.log(INIT_MESSAGE),
   )
 }
