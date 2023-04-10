@@ -1,11 +1,6 @@
-- create local docker machines to run it
-    - Differentiate containers from services
-
-    - Build your Docker image and push it to a registry such as Amazon ECR.
-    - Create a task definition that references your Docker image(s).
-    - Create a service that uses your task definition.
-    - Update your service to use the new task definition whenever you want to deploy a new version of your application.
-
+    - create PR deploys through heroku
+        - Start with a pipeline: https://devcenter.heroku.com/articles/pipelines
+        - https://devcenter.heroku.com/articles/github-integration-review-apps
     - postgress db
         - migrate password field types to varchars(since PG native are richer)
         - create enum for roles field
